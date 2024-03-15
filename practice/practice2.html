@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="root"></div>
+    <script type='text/babel'>
+
+        const {useState} = React;
+
+        /* 컴포넌트로 만들면 좋을 때
+            1. 반복적인 html
+            2. 큰 페이지
+            3. 자주 변경되는 것들
+
+            단점 : state 가져다 쓸 때 문제가 생길 수 있다. 변수의 범위 때문
+        */
+
+        function Modal() {
+                return (
+                    <div className='modal'>
+                        <h4>제목</h4>
+                        <p>날짜</p>
+                        <p>상세내용</p>
+                    </div>
+                );
+            }
+
+        function App() {
+            
+            const [blogTitle, setBlogTitle] = useState('React 연습장')
+
+            const [title, setTitle] = useState(['자바스크립트', '리액트', 'HTML']);
+
+            const [good, setGood] = useState(0);
+
+            function onClickHandler () {
+                setGood(good+1)
+            }
+
+            function onClickChangeHandler () {
+                const copyTitle = [...title]; // 아래와 같은 이유로 [...text] 이런식으로 써야함.
+                copyTitle[2] = 'CSS';
+                setTitle(copyTitle) // 기존스테이트를 복사해서 사용할 경우 비교하여 같을 경우 변경해주지 않는다.
+                                    // [array/object 특징] array/object담은 변수엔 화살표만 저장됨.
+            }
+            
+            return(
+                <div className='App'>
+                    <div className='black-nav'>
+                        <h1>{blogTitle}</h1>
+                    </div>
+
+                    <button onClick={onClickChangeHandler}> 글 수 정 </button>
+
+                    <div className='list'>
+                        <h4>{title[0]}
+                            <span onClick={onClickHandler}> 👍 </span> {good}    
+                        </h4>
+                        <p>3월 15일 작성</p>
+                    </div>
+                    <div className='list'>
+                        <h4>{title[1]}</h4>
+                        <p>3월 15일 작성</p>
+                    </div>
+                    <div className='list'>
+                        <h4>{title[2]}</h4>
+                        <p>3월 15일 작성</p>
+                    </div>
+
+                    <Modal/>
+
+                </div>
+            );
+        }
+
+
+
+
+
+
+
+
+
+
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+    </script>
+</body>
+</html>

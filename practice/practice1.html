@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="root"></div>
+    <script type='text/babel'>
+
+        function App() {
+
+            const {useState} = React;
+
+            const [title, setTitle] = useState(['자바스크립트', '리액트', 'HTML']);
+
+            const [blogTitle, setBlogTitle] = useState('React 연습장')
+            
+            
+            return(
+                <>
+                <div className='App'>
+                    <div className='black-nav'>
+                        <h1>{blogTitle}</h1>
+                    </div>
+
+                    <div className='list'>
+                        <h4>{title[0]}</h4>
+                        <p>3월 15일 작성</p>
+                    </div>
+                    <div className='list'>
+                        <h4>{title[1]}</h4>
+                        <p>3월 15일 작성</p>
+                    </div>
+                    <div className='list'>
+                        <h4>{title[2]}</h4>
+                        <p>3월 15일 작성</p>
+                    </div>
+                    
+
+                </div>
+                </>
+            );
+        }
+
+
+
+
+
+
+
+
+
+
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+    </script>
+</body>
+</html>
